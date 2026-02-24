@@ -1,0 +1,378 @@
+:root {
+  --bg: #0d0d0f;
+  --panel: #16161a;
+  --border: #2a2a35;
+  --accent: #f5c518;
+  --accent2: #ff6b35;
+  --text: #e8e8f0;
+  --muted: #6b6b80;
+  --green: #4ade80;
+  --red: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+}
+
+#root {
+  width: 100%;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Header */
+header.header {
+  text-align: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+header.header h1 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+header.header h1 span.y {
+  color: var(--accent);
+}
+
+header.header h1 span.o {
+  color: var(--accent2);
+}
+
+.language-selector {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.lang-btn {
+  padding: 6px 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.lang-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* Container Grid */
+.container {
+  width: 100%;
+  max-width: 860px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h2 {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* Diagram Card */
+.diagram-card {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+canvas {
+  filter: drop-shadow(0 0 24px rgba(245, 197, 24, 0.18));
+  border-radius: 8px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Input Groups */
+.input-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--accent);
+}
+
+input.filled {
+  border-color: var(--accent2);
+  background: #1e1810;
+}
+
+.angle-note {
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Buttons */
+.btn-solve {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition:
+    transform 0.1s,
+    background 0.2s;
+}
+
+.btn-solve:hover {
+  background: #ffd835;
+  transform: translateY(-1px);
+}
+
+.btn-solve:active {
+  transform: translateY(0);
+}
+
+.btn-reset {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.btn-reset:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* Results */
+.results-card {
+  grid-column: 1 / -1;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.result-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-item.new-val {
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.1);
+}
+
+.result-item.given-val {
+  border-color: var(--accent2);
+}
+
+.result-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.result-value {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.result-value.new {
+  color: var(--green);
+}
+
+.result-value.given {
+  color: var(--accent2);
+}
+
+.result-decimal {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge.given {
+  background: rgba(255, 107, 53, 0.15);
+  color: var(--accent2);
+}
+
+.badge.solved {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--green);
+}
+
+.error-msg {
+  color: var(--red);
+  font-size: 0.8rem;
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: 8px;
+}
+
+.check-result {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.check-ok {
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  color: var(--green);
+}
+
+.check-ok::before {
+  content: "";
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+.step-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.step {
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 8px 12px;
+  background: var(--bg);
+  border-left: 2px solid var(--border);
+  border-radius: 0 6px 6px 0;
+}
+
+.step span.formula {
+  color: var(--accent);
+}
